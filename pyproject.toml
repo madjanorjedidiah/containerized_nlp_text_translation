@@ -5,13 +5,14 @@ description = ""
 authors = ["madjanorjedidiah <jmadjanor6@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "3.9"
+python = ">=3.9,<3.10"
 flax = "^0.5.3"
 torch = "^1.12.1"
 tensorflow = "2.9.0"
 transformers = "^4.21.1"
 flake8 = "^5.0.4"
 fastapi = "^0.79.0"
+sentencepiece = "^0.1.97"
 uvicorn = {extras = ["standard"], version = "^0.18.2"}
 
 [tool.poetry.dev-dependencies]

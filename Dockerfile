@@ -1,4 +1,4 @@
-FROM python:3.8-slim as python-base
+FROM python:3.9-slim as python-base
 
 RUN mkdir -p /opt/poetry
 
@@ -24,15 +24,17 @@ COPY poetry.lock pyproject.toml /opt/poetry/
 RUN poetry install --no-dev
 
 # prerequisites for cloning model model
-RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-RUN sudo apt-get install git-lfs
+RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
+RUN apt-get install git-lfs -y 
 
 # clone model
 RUN git lfs install
-RUN git clone https://huggingface.co/t5-base /opt/poetry
+#RUN cd /opt/poetry
+RUN git clone https://huggingface.co/t5-base 
 
+#RUN cd ..
 COPY . /opt/poetry/
 
-RUN flake8 --ignore=E101,W191 /opt/poetry
+#RUN flake8 --ignore=E101,W191 /opt/poetry
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
